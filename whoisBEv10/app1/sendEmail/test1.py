@@ -25,17 +25,24 @@ def disconnectDB(con):
 def emailExists(email):
     myCon = connectDB()
     userCursor = myCon.cursor()
-    userCursor.execute('SELECT COUNT(*) FROM "f_user" WHERE "email" = %s', (email,))
-    result = userCursor.fetchone()
+    # userCursor.execute('SELECT COUNT(*) FROM "f_user" WHERE "email" = %s', (email,))
+    # result = userCursor.fetchone()
+    userCursor.execute('UPDATE "f_user" SET "pass" = %s WHERE "email" = %s', ('passs', email,))
+    myCon.commit()
     userCursor.close()
     disconnectDB(myCon)
-    return result[0] > 0
-
+    # return result[0] > 0
+        # userCursor.execute('SELECT * FROM "f_user" WHERE "id" = %s', (id,))
+        # user = userCursor.fetchone()
+        
+        # # Update the password
+        # userCursor.execute('UPDATE "f_user" SET "pass" = %s WHERE "id" = %s', (pas, id))
+        
 
 myCon = connectDB()
 
 # print(myCon)
 
-print(emailExists('uproagr@gmail.com'))
+print(emailExists('odonkhuu4@gmail.com'))
 
 disconnectDB(myCon)

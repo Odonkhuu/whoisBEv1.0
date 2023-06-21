@@ -87,8 +87,16 @@ def forgetView(request):
     print(newPass2)
     resp = {}
     resp["email"] = email
-    resp["newPass1"] = newPass1        
-    resp["newPass2"] = newPass2        
+    resp["newPass1"] = newPass1
+    
+    myCon = connectDB()
+    userCursor = myCon.cursor()
+    userCursor.execute('UPDATE "f_user" SET "pass" = %s WHERE "email" = %s', (newPass1, email,))
+    myCon.commit()
+    userCursor.close()
+    disconnectDB(myCon)
+    
+    
     return HttpResponse(json.dumps(resp), content_type="application/json")
 ####################################
 
