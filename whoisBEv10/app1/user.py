@@ -80,6 +80,7 @@ def userLoginView(request):
 
 # nuuts vg sergeeh hesgiin
 def forgetView(request):
+    print("Hello")
     jsons = json.loads(request.body)
     email = jsons['email']
     newPass1 = jsons['newPass1']
